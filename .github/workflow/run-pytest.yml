@@ -1,0 +1,21 @@
+name: Run pytest # Gives the workflow a name, Run pytest. This name appears in the GitHub Actions page. PreviousNext
+on: push #Starts the workflow automatically whenever you push code to the GitHub repository. PreviousNext
+
+jobs: 
+  test:
+    runs-on: ubuntu-latest #Tells GitHub to use a virtual computer running Ubuntu (a Linux operating system) to perform the tests. PreviousNext
+
+    steps: #Begins the list of instructions that the virtual computer must follow, in order. PreviousNext
+      - name: Checkout respository #label or comment
+        uses: actions/checkout@v4 #Downloads a copy of your GitHub repository onto the virtual computer so it can access your code. PreviousNext
+      
+      - name: Set up Python 
+        uses: actions/setup-python@v5 #set up python on virtual computer
+        with:
+          python-version: "3.12"
+      
+      - name: Install pytest
+        run: pip install pytest #install pytest
+      
+      - name: Run pytest
+        run: python -m pytest tests/ #Run the test scripts
